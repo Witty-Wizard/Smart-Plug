@@ -3,11 +3,42 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <LittleFS.h>
+#include "Credentials.h"
+
+AsyncWebServer server(80);
 
 // put function declarations here:
+void notFound(AsyncWebServerRequest *request);
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(115200);
+  LittleFS.begin();
+
+  // Begin Wifi access point
+  if (!WiFi.softAP(SSID, PASSWORD)) {
+    log_e("Soft AP creation failed.");
+    while(1);
+  }
+
+  Serial.println("Access Point started");
+  Serial.println(WiFi.softAPIP());
+
+  // Route for root index.html
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(LittleFS, "/index.html", "text/html"); });
+
+  // Route for root index.css
+  server.on("/index.css", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(LittleFS, "/index.css", "text/css"); });
+
+  // Route for root index.js
+  server.on("/index.js", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(LittleFS, "/index.js", "text/javascript"); });
+            
+  server.onNotFound(notFound);
+  
+  server.begin();
 }
 
 void loop() {
@@ -15,3 +46,6 @@ void loop() {
 }
 
 // put function definitions here:
+void notFound(AsyncWebServerRequest *request){
+  request->send(404, "text/plain", "Not found");
+}
