@@ -61,7 +61,7 @@ The following software tools are used for this project:
 
 ## Setup Instructions
 
-[Insert step-by-step instructions on how to assemble the hardware components and load the software onto the ESP8266. Include diagrams, schematics, or photos if necessary.]
+
 
 ## Usage
 
@@ -71,10 +71,3 @@ The following software tools are used for this project:
 
 [Include information for potential contributors, such as how to report issues, submit feature requests, or contribute code or documentation.]
 
-## License
-
-This project is licensed under the [License Name] License - see the [LICENSE.md](LICENSE.md) file for details.
-
----
-
-Replace the placeholders with actual content and make sure to add relevant images, diagrams, and links to your project's GitHub repository, documentation, and any other resources. This README should provide a clear and concise overview of your smart plug project, helping others understand its purpose and how to use it.
