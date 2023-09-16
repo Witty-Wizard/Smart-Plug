@@ -60,8 +60,7 @@ The following software tools are used for this project:
 [Provide version numbers and any special setup/configuration instructions for these software tools.]
 
 ## Setup Instructions
-
-
+![image](https://github.com/sahilsingh2002/Smart-Plug/assets/74174130/4fa95754-0666-488c-8977-adb614fefd42)
 
 ## Usage
 
