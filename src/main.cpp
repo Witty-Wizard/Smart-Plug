@@ -27,14 +27,15 @@ void setup() {
   // Route for root index.html
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(LittleFS, "/index.html", "text/html"); });
-
+  
   // Route for root index.css
-  server.on("/index.css", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(LittleFS, "/index.css", "text/css"); });
+  server.on("/static/css/main.073c9b0a.css", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(LittleFS, "/static/css/main.073c9b0a.css", "text/css"); });
 
   // Route for root index.js
-  server.on("/index.js", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send(LittleFS, "/index.js", "text/javascript"); });
+  server.on("/static/js/main.65a72d31.js", HTTP_GET, [](AsyncWebServerRequest *request)
+            { request->send(LittleFS, "/static/js/main.65a72d31.js", "text/javascript"); });
+            
             
   server.onNotFound(notFound);
   
