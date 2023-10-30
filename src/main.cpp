@@ -36,7 +36,6 @@ void setup() {
   server.on("/static/js/main.65a72d31.js", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(LittleFS, "/static/js/main.65a72d31.js", "text/javascript"); });
             
-            
   server.onNotFound(notFound);
   
   server.begin();
