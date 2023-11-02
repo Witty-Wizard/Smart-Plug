@@ -8,10 +8,16 @@
 AsyncWebServer server(80);
 
 float voltage;
+float current;
+float power;
+float power_factor;
 
 // put function declarations here:
 void notFound(AsyncWebServerRequest *request);
 String sendVoltage();
+String sendCurrent();
+String sendPower();
+String sendPowerFactor();
 
 void setup() {
   // put your setup code here, to run once:
@@ -44,13 +50,14 @@ void setup() {
             { request->send_P(200, "text/plain", sendVoltage().c_str()); });
 
   server.on("/current", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", "ok"); });
+            { request->send_P(200, "text/plain", sendCurrent().c_str()); });
 
   server.on("/power", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", "ok"); });
+            { request->send_P(200, "text/plain", sendPower().c_str()); });
 
   server.on("/power_factor", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", "ok"); });          
+            { request->send_P(200, "text/plain", sendPowerFactor().c_str()); });     
+                 
   server.onNotFound(notFound);
   
   server.begin();
@@ -58,8 +65,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  voltage = map(analogRead(36),0,4095,0,3.3);
-  Serial.println(voltage);
+  voltage = analogRead(36);
 }
 
 // put function definitions here:
@@ -69,4 +75,19 @@ void notFound(AsyncWebServerRequest *request){
 
 String sendVoltage(){
   return String(voltage);
-  }
+}
+
+String sendCurrent(){
+  current++;
+  return String(current);
+}
+
+String sendPower(){
+  power = voltage * current;
+  return String(power);
+}
+
+String sendPowerFactor(){
+  power_factor++;
+  return String(power_factor);
+}

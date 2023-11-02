@@ -70,3 +70,7 @@ The following software tools are used for this project:
 
 [Include information for potential contributors, such as how to report issues, submit feature requests, or contribute code or documentation.]
 
+## TO DO
+- Power factor calculation ( suing halfwave cycle)
+- Power calculation
+- front end design
