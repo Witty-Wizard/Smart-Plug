@@ -5,8 +5,15 @@
 #include <LittleFS.h>
 #include "Credentials.h"
 
+unsigned long last_time = 0;  
+unsigned long Delay = 100;
+
 AsyncWebServer server(80);
 
+// Create an Event Source on /events
+AsyncEventSource events("/events");
+
+// Create variables to store measurements
 float voltage;
 float current;
 float power;
@@ -14,10 +21,6 @@ float power_factor;
 
 // put function declarations here:
 void notFound(AsyncWebServerRequest *request);
-String sendVoltage();
-String sendCurrent();
-String sendPower();
-String sendPowerFactor();
 
 void setup() {
   // put your setup code here, to run once:
@@ -46,48 +49,35 @@ void setup() {
   server.on("/index.js", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(LittleFS, "/index.js", "text/javascript"); });
 
-  server.on("/voltage", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", sendVoltage().c_str()); });
+  events.onConnect([](AsyncEventSourceClient *client){
+    if(client->lastId()){
+      Serial.printf("Client reconnected! Last message ID that it got is: %u\n", client->lastId());
+    }
 
-  server.on("/current", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", sendCurrent().c_str()); });
-
-  server.on("/power", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", sendPower().c_str()); });
-
-  server.on("/power_factor", HTTP_GET, [](AsyncWebServerRequest *request)
-            { request->send_P(200, "text/plain", sendPowerFactor().c_str()); });     
+    client->send("hi!", NULL, millis(), 10000);
+  });  
                  
   server.onNotFound(notFound);
-  
+  server.addHandler(&events);
   server.begin();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  voltage = analogRead(36);
+  if ((millis() - last_time) > Delay) {
+
+    // Send Events to the Web Server with the Sensor Readings
+    events.send("ping",NULL,millis());
+    events.send(String(voltage).c_str(),"voltage",millis());
+    events.send(String(current).c_str(),"current",millis());
+    events.send(String(power).c_str(),"power",millis());
+    events.send(String(power_factor).c_str(),"power_factor",millis());
+    
+    last_time = millis();
+  }
 }
 
 // put function definitions here:
 void notFound(AsyncWebServerRequest *request){
   request->send(404, "text/plain", "Not found");
-}
-
-String sendVoltage(){
-  return String(voltage);
-}
-
-String sendCurrent(){
-  current++;
-  return String(current);
-}
-
-String sendPower(){
-  power = voltage * current;
-  return String(power);
-}
-
-String sendPowerFactor(){
-  power_factor++;
-  return String(power_factor);
 }
