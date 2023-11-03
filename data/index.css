@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.heading {
+  text-align: center;
+  background-color: aqua;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+/* .btn1{
+    margin-top: 10px;
+} */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(40px);
+  -ms-transform: translateX(40px);
+  transform: translateX(40px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.label-text {
+  display: block;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.001s;
+  line-height: 1;
+  margin: 0 auto;
+}
+
+input:checked + .slider + .label-text {
+  opacity: 0;
+  pointer-events: none;
+}
+
+input:checked + .slider + .label-text::before {
+  content: "ON";
+  color: white;
+}
+
+.container1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftSide1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 300px;
+  row-gap: 100px;
+  flex-wrap: wrap;
+  margin-left: 100px;
+  margin-top: 30px;
+}
+
+label#myCheckbox.switch {
+  margin-bottom: 10px;
+}
+
+.usageHours {
+  justify-content: end;
+  vertical-align:bottom;
+}
+
+.usageHours label span {
+    margin-right: 5px; /* Add spacing between "Usage" and "Hours" */
+}
+
+.rightSide1 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 40px;
+    margin-top: 30px;
+    margin-right: 100px;
+    /* width: max-content; */
+
+}
+
+input#usage {
+    display: flex;
+    justify-content: space-between;
+
+}
