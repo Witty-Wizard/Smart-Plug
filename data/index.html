@@ -1,15 +1,85 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="index.css">
-        <title>Smart Switch</title>
-    </head>
-    <body>
-    current : <span id="current">"0"</span>
-    voltage : <span id="voltage">"ok"</span>
-    power : <span id="power">"ok"</span>
-    power factor : <span id="power_factor">"ok"</span>
-        <script src="index.js"></script>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minor Project</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="data">
+        <div class="heading">IoT Smart Plug</div>
+        <div class="container1">
+            <!-- <button class="btn1" type="button">Turn ON</button> -->
+            <div class="leftSide1">
+                <div class="btn1" style="text-align: center; align-items: center; font-size: xx-large;"> On/Off
+                    <label class="switch" id="myCheckbox">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        <span class="label-text" style="padding-left: 16px; font-size: medium; padding-bottom: 22px;">OFF</span>
+                    </label>
+                </div>
+                <div class="usageHours">
+                    <form class="usageHours">
+                        <label for="usage">
+                            <span style="font-size: xx-large;">Usage Hours</span>
+                        </label>
+                        <input type="text" id="usage" name="usage"
+                            style="vertical-align: middle; margin-left: 5px; width: 280px; height: 50px;">
+                    </form>
+                </div>
+            </div>
+
+            <div class="rightSide1">
+                <div class="usageHours">
+                    <form class="usageHours">
+                        <label for="usage">
+                            <span style="font-size: xx-large;">Power (KW)</span>
+                        </label>
+                        <input type="text" id="usage" name="usage"
+                            style="vertical-align: middle; margin-left: 5px; width: 280px; height: 50px;">
+                    </form>
+                </div>
+                <div class="usageHours">
+                    <form class="usageHours">
+                        <label for="usage">
+                            <span style="font-size: xx-large;">Voltage (Volts)</span>
+                        </label>
+                        <input type="text" id="usage" name="usage"
+                            style="vertical-align: middle; margin-left: 5px; width: 280px; height: 50px;">
+                    </form>
+                </div>
+                <div class="usageHours">
+                    <form class="usageHours">
+                        <label for="usage">
+                            <span style="font-size: xx-large;">Current (Amps)</span>
+                        </label>
+                        <input type="text" id="usage" name="usage"
+                            style="vertical-align: middle; margin-left: 5px; width: 280px; height: 50px;">
+                    </form>
+                </div>
+                <div class="usageHours">
+                    <form class="usageHours">
+                        <label for="usage">
+                            <span style="font-size: xx-large;">Power Factor</span>
+                        </label>
+                        <input type="text" id="usage" name="usage"
+                            style="vertical-align: middle; margin-left: 5px; width: 280px; height: 50px;">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="graph">
+
+    </div>
+    <div class="infos">
+
+    </div>
+    <script src="index.js"></script>
+</body>
+
 </html>
