@@ -1,13 +1,24 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: rgb(228, 239, 239);
 }
 
 .heading {
   text-align: center;
-  background-color: #038fc7;
+  /* background-color: #038fc7; */
+  background-color: #6cccf3;
   padding-bottom: 10px;
   padding-top: 10px;
+  font-size: 100px;
+  margin-bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.container1 {
+  font-family: "DM Sans", sans-serif;
 }
 
 /* .btn1{
@@ -121,37 +132,35 @@ label#myCheckbox.switch {
 
 .usageHours {
   justify-content: end;
-  vertical-align:bottom;
+  vertical-align: bottom;
 }
 
 .usageHours label span {
-    margin-right: 5px; /* Add spacing between "Usage" and "Hours" */
+  margin-right: 5px; /* Add spacing between "Usage" and "Hours" */
 }
 
 .rightSide1 {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    row-gap: 80px;
-    margin-top: 30px;
-    margin-right: 150px;
-    width: max-content;
-
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 80px;
+  margin-top: 30px;
+  margin-right: 150px;
+  width: max-content;
 }
 
 input#usage {
-    display: flex;
-    justify-content: space-between;
-
+  display: flex;
+  justify-content: space-between;
 }
 .usageHours {
-    display: flex; /* Use a flex container to arrange label and div side by side */
-    align-items: center; /* Vertically center align label and div */
+  display: flex; /* Use a flex container to arrange label and div side by side */
+  align-items: center; /* Vertically center align label and div */
 }
 
 .rightSide1 label {
-    margin-right: 10px; /* Add some spacing between label and div */
-    font-size: xx-large;
+  margin-right: 10px; /* Add some spacing between label and div */
+  font-size: xx-large;
 }
 
 .usageHours > div {

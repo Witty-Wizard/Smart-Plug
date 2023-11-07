@@ -8,17 +8,23 @@ checkbox.addEventListener("change", function () {
 });
 
 var img = document.getElementById("bulbImage");
+
+img.style.transition = "src 0.5s ease-in-out, height 0.5s ease-in-out";
+
 checkbox.addEventListener("change", function () {
   if (this.querySelector("input").checked) {
-    img.src = "bulbOnBaby.png";
-    img.style.height = "98px";
-    // img.style.width = "90px";
-  }
-  else {
-    img.src = "bulbOffBaby.png";
+    img.style.height = "100px";
+    setTimeout(function () {
+      img.src = "bulbOnBaby.png";
+    }, 50); // Delay to make the transition more noticeable
+  } else {
     img.style.height = "90px";
+    setTimeout(function () {
+      img.src = "bulbOffBaby.png";
+    }, 50); // Delay to make the transition more noticeable
   }
 });
+
 
 
 function fetchData() {
