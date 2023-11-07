@@ -3,7 +3,11 @@ var checkbox = document.getElementById("myCheckbox");
 
 checkbox.addEventListener("change", function () {
   if (this.querySelector("input").checked) {
+    turnOn();
     fetchData();
+  }
+  else{
+    turnOff();
   }
 });
 
@@ -27,14 +31,25 @@ checkbox.addEventListener("change", function () {
 
 
 
+function turnOn(){
+    var valReq=new XMLHttpRequest();
+    
+    valReq.open("GET","/on",true);
+    valReq.send();
+
+    console.log(this.responseText);
+}
+
+function turnOff(){
+  var valReq=new XMLHttpRequest();
+  
+  valReq.open("GET","/off",true);
+  valReq.send();
+
+  console.log(this.responseText);
+}
+
 function fetchData() {
-    // function turnOn{
-    //     var valReq=new XMLHttpRequest();
-        
-    //     valReq.open("GET","/current",true);
-    //     valReq.send();
-    // }
-  // alert("Fetching data");
   if (!!window.EventSource) {
       
       var source = new EventSource('/events');
