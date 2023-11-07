@@ -5,7 +5,7 @@ body {
 
 .heading {
   text-align: center;
-  background-color: aqua;
+  background-color: #038fc7;
   padding-bottom: 10px;
   padding-top: 10px;
 }
@@ -17,8 +17,8 @@ body {
 .switch {
   position: relative;
   display: inline-block;
-  width: 90px;
-  height: 50px;
+  width: 140px;
+  height: 70px;
   margin-top: 10px;
   margin-left: 20px;
   vertical-align: middle;
@@ -47,8 +47,8 @@ body {
 .slider:before {
   position: absolute;
   content: "";
-  height: 40px;
-  width: 40px;
+  height: 60px;
+  width: 60px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -65,9 +65,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(40px);
-  -ms-transform: translateX(40px);
-  transform: translateX(40px);
+  /* -webkit-transform: translateX(70px); */
+  -ms-transform: translateX(70px);
+  transform: translateX(70px);
 }
 
 .slider.round {
@@ -111,7 +111,7 @@ input:checked + .slider + .label-text::before {
   height: 300px;
   row-gap: 100px;
   flex-wrap: wrap;
-  margin-left: 100px;
+  margin-left: 200px;
   margin-top: 30px;
 }
 
@@ -132,10 +132,10 @@ label#myCheckbox.switch {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    row-gap: 40px;
+    row-gap: 80px;
     margin-top: 30px;
-    margin-right: 100px;
-    /* width: max-content; */
+    margin-right: 150px;
+    width: max-content;
 
 }
 
@@ -143,4 +143,17 @@ input#usage {
     display: flex;
     justify-content: space-between;
 
+}
+.usageHours {
+    display: flex; /* Use a flex container to arrange label and div side by side */
+    align-items: center; /* Vertically center align label and div */
+}
+
+.rightSide1 label {
+    margin-right: 10px; /* Add some spacing between label and div */
+    font-size: xx-large;
+}
+
+.usageHours > div {
+  border-radius: 20px;
 }

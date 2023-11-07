@@ -7,6 +7,20 @@ checkbox.addEventListener("change", function () {
   }
 });
 
+var img = document.getElementById("bulbImage");
+checkbox.addEventListener("change", function () {
+  if (this.querySelector("input").checked) {
+    img.src = "bulbOnBaby.png";
+    img.style.height = "98px";
+    // img.style.width = "90px";
+  }
+  else {
+    img.src = "bulbOffBaby.png";
+    img.style.height = "90px";
+  }
+});
+
+
 function fetchData() {
     // function turnOn{
     //     var valReq=new XMLHttpRequest();
