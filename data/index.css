@@ -167,6 +167,16 @@ input#usage {
   border-radius: 20px;
 }
 
+#power,
+#voltage,
+#current,
+#power_factor {
+  width: 280px;
+}
+
+#bulbImage {
+  height: 90px;
+}
 
 @media (max-width: 480px) {
   body {
@@ -174,7 +184,7 @@ input#usage {
     align-items: center;
     margin: auto;
   }
-  
+
   .container1 {
     display: flex;
     flex-direction: column;
@@ -190,28 +200,36 @@ input#usage {
   .rightSide1 {
     row-gap: 60px;
   }
-  
-  .leftSide1, .rightSide1 {
-    margin: auto;
-    text-align: center; 
+
+  .leftSide1,
+  .rightSide1 {
+    margin:auto;
+    text-align: center;
   }
 
-  .label-text, .usageHours, .label-text::before {
+  .label-text,
+  .usageHours,
+  .label-text::before {
     font-size: 20px;
   }
-  
+
   #dabbe {
     font-size: 19px;
   }
-  
+
   .heading {
-    font-size: 45px; 
-    max-width: 100%; 
-    padding: 20px; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    font-size: 40px;
+    padding: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-bottom: 0px;
   }
 
+  #power,
+  #voltage,
+  #current,
+  #power_factor {
+    width: 180px;
+  }
 }
