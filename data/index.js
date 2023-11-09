@@ -8,6 +8,7 @@ checkbox.addEventListener("change", function () {
   }
   else{
     turnOff();
+    ignoreData();
   }
 });
 
@@ -47,6 +48,12 @@ function turnOff(){
   valReq.send();
 
   console.log(this.responseText);
+}
+function ignoreData(){
+  document.getElementById("current").innerHTML = "";
+  document.getElementById("voltage").innerHTML = "";
+  document.getElementById("power").innerHTML = "";
+  document.getElementById("power_factor").innerHTML = "";
 }
 
 function fetchData() {
