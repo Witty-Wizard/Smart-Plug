@@ -50,10 +50,10 @@ function turnOff(){
   console.log(this.responseText);
 }
 function ignoreData(){
-  document.getElementById("current").innerHTML = "";
-  document.getElementById("voltage").innerHTML = "";
-  document.getElementById("power").innerHTML = "";
-  document.getElementById("power_factor").innerHTML = "";
+  document.getElementById("current").innerHTML = "0";
+  document.getElementById("voltage").innerHTML = "0";
+  document.getElementById("power").innerHTML = "0";
+  document.getElementById("power_factor").innerHTML = "0";
 }
 
 function fetchData() {

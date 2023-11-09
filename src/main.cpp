@@ -5,11 +5,14 @@
 #include <LittleFS.h>
 #include "Credentials.h"
 
-unsigned long total_time = 0; 
-unsigned long current_time = 0;  
+unsigned long total_time = 0;
+unsigned long current_time = 0;
+unsigned long last_time_1 = 0;
 unsigned long last_time = 0;
-unsigned long dt = 0;  
+unsigned long dt = 0;
 unsigned long Delay = 1;
+
+int i = 0;
 
 AsyncWebServer server(80);
 
@@ -35,15 +38,8 @@ float current_i;
 
 // put function declarations here:
 void notFound(AsyncWebServerRequest *request);
-String ledOn(){
-  digitalWrite(2,HIGH);
-  return "led on";
-}
-
-String ledOff(){
-  digitalWrite(2,LOW);
-  return "led off";
-}
+String ledOn();
+String ledOff();
 
 void setup() {
   // put your setup code here, to run once:
@@ -100,45 +96,56 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  // current_time = millis();
-  // dt = (current_time - last_time);
+  current_time = millis();
+  dt = (current_time - last_time);
+  if(current_time - last_time_1 > 5000){
+    // Send Events to the Web Server with the Sensor Readings:
+    events.send(String(voltage_rms).c_str(),"voltage",millis());
+    events.send(String(current_rms).c_str(),"current",millis());
+    events.send(String(power).c_str(),"power",millis());
+    events.send(String(power_factor).c_str(),"power_factor",millis());
+    last_time_1 = millis();
+  }
+  if (dt > Delay) {
+    voltage_previous = voltage;
+    voltage = map(analogRead(34),0,4095,-315,+315);
 
-  // if (dt > Delay) {
-    // voltage_previous = voltage;
+    if(voltage_previous < 0 && voltage >=0){
+      voltage_rms = sqrt(voltage_i / total_time);
+      current_rms = sqrt(current_i / total_time);
+      power_factor = real_energy/apparant_energy;
+      power = real_energy / total_time;
+      
 
-    // if(voltage_previous < 0 && voltage >=0){
-    //   voltage_rms = sqrt(voltage_i / total_time);
-    //   current_rms = sqrt(current_i / total_time);
-    //   power_factor = real_energy/apparant_energy;
-    //   power = real_energy / total_time;
+      total_time = 0;
+      voltage_i = 0;
+      current_i = 0;
+      real_energy = 0;
+      apparant_energy = 0;
+    }
 
-    //   total_time = 0;
-    //   voltage_i = 0;
-    //   current_i = 0;
-    //   real_energy = 0;
-    //   apparant_energy = 0;
+    total_time += dt;
+    voltage_i += voltage*voltage * dt;
+    current_i += current*current * dt;
+    real_energy += current*voltage * dt;
+    apparant_energy += abs(current*voltage) * dt;
 
-    // }
-
-    // total_time += dt;
-    // voltage_i += voltage*voltage * dt;
-    // current_i += current*current * dt;
-    // real_energy += current*voltage * dt;
-    // apparant_energy += abs(current*voltage) * dt;
-
-    // last_time = millis();
-  // }
-
-  // Send Events to the Web Server with the Sensor Readings
-  events.send(String(voltage_rms).c_str(),"voltage",millis());
-  events.send(String(current_rms).c_str(),"current",millis());
-  events.send(String(power).c_str(),"power",millis());
-  events.send(String(power_factor).c_str(),"power_factor",millis());
-  delay(1000);
+    last_time = millis();
+  }
 
 }
 
 // put function definitions here:
 void notFound(AsyncWebServerRequest *request){
   request->send(404, "text/plain", "Not found");
+}
+
+String ledOn(){
+  digitalWrite(2,HIGH);
+  return "led on";
+}
+
+String ledOff(){
+  digitalWrite(2,LOW);
+  return "led off";
 }
