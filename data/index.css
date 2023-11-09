@@ -12,7 +12,7 @@ body {
   padding-top: 10px;
   font-size: 100px;
   margin-bottom: 30px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding-top: 30px;
   padding-bottom: 30px;
 }
@@ -165,4 +165,53 @@ input#usage {
 
 .usageHours > div {
   border-radius: 20px;
+}
+
+
+@media (max-width: 480px) {
+  body {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .leftSide1 {
+    height: 220px;
+  }
+
+  .rightSide1 {
+    row-gap: 60px;
+  }
+  
+  .leftSide1, .rightSide1 {
+    margin: auto;
+    text-align: center; 
+  }
+
+  .label-text, .usageHours, .label-text::before {
+    font-size: 20px;
+  }
+  
+  #dabbe {
+    font-size: 19px;
+  }
+  
+  .heading {
+    font-size: 45px; 
+    max-width: 100%; 
+    padding: 20px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    margin-bottom: 0px;
+  }
+
 }
