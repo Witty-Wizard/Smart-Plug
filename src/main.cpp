@@ -5,14 +5,14 @@
 #include <LittleFS.h>
 #include "Credentials.h"
 
+#define LED_PIN 26
+
 unsigned long total_time = 0;
 unsigned long current_time = 0;
 unsigned long last_time_1 = 0;
 unsigned long last_time = 0;
 unsigned long dt = 0;
 unsigned long Delay = 1;
-
-int i = 0;
 
 AsyncWebServer server(80);
 
@@ -43,8 +43,9 @@ String ledOff();
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(34,INPUT);
-  pinMode(2,OUTPUT);
+  pinMode(36,INPUT);
+  pinMode(39,INPUT);
+  pinMode(LED_PIN,OUTPUT);
   Serial.begin(115200);
   LittleFS.begin();
 
@@ -98,7 +99,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   current_time = millis();
   dt = (current_time - last_time);
-  if(current_time - last_time_1 > 5000){
+  if(current_time - last_time_1 > 7000){
     // Send Events to the Web Server with the Sensor Readings:
     events.send(String(voltage_rms).c_str(),"voltage",millis());
     events.send(String(current_rms).c_str(),"current",millis());
@@ -108,7 +109,11 @@ void loop() {
   }
   if (dt > Delay) {
     voltage_previous = voltage;
-    voltage = map(analogRead(34),0,4095,-315,+315);
+    voltage = map(analogRead(36),0,4095,-510,+510);
+    current = map(analogRead(39),0,4095,-5,+5);
+    Serial.print(voltage);
+    Serial.print("  ");
+    Serial.println(current);
 
     if(voltage_previous < 0 && voltage >=0){
       voltage_rms = sqrt(voltage_i / total_time);
@@ -141,11 +146,11 @@ void notFound(AsyncWebServerRequest *request){
 }
 
 String ledOn(){
-  digitalWrite(2,HIGH);
+  digitalWrite(LED_PIN,HIGH);
   return "led on";
 }
 
 String ledOff(){
-  digitalWrite(2,LOW);
+  digitalWrite(LED_PIN,LOW);
   return "led off";
 }
