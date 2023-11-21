@@ -6,6 +6,8 @@
 #include "Credentials.h"
 
 #define LED_PIN 26
+#define VOLTAGE_SENSE 36
+#define CURRENT_SENSE 39
 
 unsigned long total_time = 0;
 unsigned long current_time = 0;
@@ -43,8 +45,8 @@ String ledOff();
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(36,INPUT);
-  pinMode(39,INPUT);
+  pinMode(CURRENT_SENSE,INPUT);
+  pinMode(VOLTAGE_SENSE,INPUT);
   pinMode(LED_PIN,OUTPUT);
   Serial.begin(115200);
   LittleFS.begin();
@@ -109,8 +111,8 @@ void loop() {
   }
   if (dt > Delay) {
     voltage_previous = voltage;
-    voltage = map(analogRead(36),0,4095,-510,+510);
-    current = map(analogRead(39),0,4095,-5,+5);
+    voltage = map(analogRead(VOLTAGE_SENSE),0,4095,-510,+510);
+    current = map(analogRead(CURRENT_SENSE),0,4095,-5,+5);
     Serial.print(voltage);
     Serial.print("  ");
     Serial.println(current);
