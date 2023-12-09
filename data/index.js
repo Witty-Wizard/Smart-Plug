@@ -25,6 +25,30 @@ var checkbox = document.getElementById("myCheckbox");
 //   }
 // });
 
+const btn = document.getElementById("gyan_bato");
+
+btn.addEventListener("click", function handleClick() {
+  const initialText = "Show Detailed Analysis";
+
+  if (btn.textContent.toLowerCase().includes(initialText.toLowerCase())) {
+    btn.textContent = "Hide Detailed Analysis";
+    displayText();
+  } else {
+    btn.textContent = initialText;
+    hideText();
+  }
+});
+
+function displayText() {
+  var text = document.getElementById("analysis");
+  text.style.display = "block";
+}
+
+function hideText() {
+  var text = document.getElementById("analysis");
+  text.style.display = "none";
+}
+
 
 
 function fetchData() {

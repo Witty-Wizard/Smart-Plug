@@ -17,6 +17,28 @@ body {
   padding-bottom: 30px;
 }
 
+
+#gyan_bato {
+  margin-left: 550px;
+  margin-bottom: 20px;
+  background-color: #f1863a;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#analysis {
+  text-align: left;
+  justify-content: center;
+  width: 100%;
+  margin-left: 400px;
+}
+
 /* .container1 {
   font-family: "DM Sans", sans-serif;
 } */
@@ -145,8 +167,8 @@ label#myCheckbox.switch {
   flex-direction: column;
   row-gap: 80px;
   margin-top: 30px;
-  margin-right: 150px;
-  width: max-content;
+  margin-right: 320px;
+  width: auto;
 }
 
 input#usage {
@@ -180,61 +202,43 @@ input#usage {
 
 @media (max-width: 480px) {
   body {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
-
-  /* .container1 {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0px;
-    margin-top: 0px;
-    margin-bottom: 10px;
-  } */
-
-  /* .leftSide1 {
-    height: 220px;
-  } */
-
-  /* .rightSide1 {
-    row-gap: 60px;
-  } */
-
-  /* .leftSide1,
-  .rightSide1 {
-    margin:auto;
-    text-align: center;
-  } */
-
-  .rightSide1 label {
-    margin-left: 40px;
-    align-items: center;
-  }
-
-  .label-text,
-  .usageHours,
-  .label-text::before {
-    font-size: 20px;
-  }
-
-  #dabbe {
-    font-size: 19px;
+    text-align: center; /* Center align the content */
   }
 
   .heading {
-    /* font-size: 40px; */
-    padding: 20px;
-    /* white-space: nowrap; */
-    /* overflow: hidden; */
-    margin-bottom: 0px;
+    text-align: center; /* Center align the heading */
+    margin-left: 0px; /* Remove margin for better centering */
+    font-size: 60px;
   }
 
-  #power,
-  #voltage,
-  #current,
-  #power_factor {
-    width: 180px;
+  .container1 {
+    flex-direction: column;
+    align-items: center;
   }
+
+  .rightSide1 {
+    margin-right: 0; /* Remove right margin for better centering */
+  }
+
+  .rightSide1 label {
+    margin-left: 0; /* Remove left margin for better centering */
+    text-align: center; /* Center align the label */
+  }
+
+  #gyan_bato {
+    margin-left: 0px; /* Remove left margin for better centering */
+  }
+
+  #analysis {
+    margin-left: 5px; /* Remove left margin for better centering */
+    /* margin-right: 20px; */
+  }
+
+
+  #power, #voltage, #current, #power_factor {
+    width: 100%; /* Make data displays take full width */
+  }
+}
+
+
 }

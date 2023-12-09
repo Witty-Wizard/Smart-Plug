@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap" rel="stylesheet">
 
-    
+
 </head>
 
 <body>
@@ -38,32 +38,57 @@
 
             <div class="rightSide1">
                 <div class="usageHours">
-                    
-                        <label for="usage">
-                            <span id="dabbe">Power (KW)</span>
-                        </label>
-                        <div id="power" style="font-size: 40px; border:1px solid black; height:50px"></div>
+
+                    <label for="usage">
+                        <span id="dabbe">Power (KW)</span>
+                    </label>
+                    <div id="power" style="font-size: 40px; border:1px solid black; height:50px"></div>
                 </div>
                 <div class="usageHours">
-                        <label for="usage">
-                            <span id="dabbe">Voltage (Volts)</span>
-                        </label>
-                        <div id="voltage" style="font-size: 40px; border:1px solid black; height:50px"></div>
+                    <label for="usage">
+                        <span id="dabbe">Voltage (Volts)</span>
+                    </label>
+                    <div id="voltage" style="font-size: 40px; border:1px solid black; height:50px"></div>
                 </div>
                 <div class="usageHours">
-                    
-                        <label for="usage">
-                            <span id="dabbe">Current (Amps)</span>
-                        </label>
-                        <div id="current" style="font-size: 40px; border:1px solid black; height:50px"></div>
+
+                    <label for="usage">
+                        <span id="dabbe">Current (Amps)</span>
+                    </label>
+                    <div id="current" style="font-size: 40px; border:1px solid black; height:50px"></div>
                 </div>
                 <div class="usageHours">
-                    
-                        <label for="usage">
-                            <span id="dabbe">Power Factor</span>
-                        </label>
-                        <div id="power_factor" style="font-size: 40px; border:1px solid black; height:50px"></div>
+
+                    <label for="usage">
+                        <span id="dabbe">Power Factor</span>
+                    </label>
+                    <div id="power_factor" style="font-size: 40px; border:1px solid black; height:50px"></div>
                 </div>
+
+                <div class="gyan">
+                    <button id="gyan_bato">Show Detailed Analysis</button>
+                    <div id="analysis" style="display: none;">
+                        <h3 style="font-weight: bold; padding-right: 20px;">Interpretation of Results -:</h3>
+                        <h4 style="font-weight: lighter; line-height: 0.8cm ;">
+                    
+                        • &nbsp;&nbsp;A Power Factor close to 1 indicates efficient power usage.<br>
+                        • &nbsp;&nbsp;Power factor ranges -:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Good: 0.95 – 1<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Poor: 0.85 – 0.95<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bad: 0.85 and below<br>
+
+                        • &nbsp;&nbsp;Fluctuations in power factor and voltage may suggest variations in the load.<br>
+                        <br>
+                        Recommendations for Improving Power Factor:<br>
+                        1. &nbsp;&nbsp;Install Power Factor Correction Devices such as capacitor banks<br>
+                        2. &nbsp;&nbsp;Ensure a balanced distribution of electrical loads across all phases.<br>
+                        3. &nbsp;&nbsp;Monitor and Adjust Inefficient Equipment<br>
+                        4. &nbsp;&nbsp;Utilize IoT Smart Plug Insights for helpful insights<br>
+                        5. &nbsp;&nbsp;Regular Maintenance of equipments such as power factor correction devices.<br>
+                            </h4>
+                    </div>
+                </div>
+
 
             </div>
         </div>
