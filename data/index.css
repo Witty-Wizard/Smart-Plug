@@ -17,14 +17,14 @@ body {
   padding-bottom: 30px;
 }
 
-.container1 {
+/* .container1 {
   font-family: "DM Sans", sans-serif;
-}
+} */
 
 /* .btn1{
     margin-top: 10px;
 } */
-
+/* 
 .switch {
   position: relative;
   display: inline-block;
@@ -33,17 +33,17 @@ body {
   margin-top: 10px;
   margin-left: 20px;
   vertical-align: middle;
-}
+} */
 
 /* Hide default HTML checkbox */
-.switch input {
+/* .switch input {
   opacity: 0;
   width: 0;
   height: 0;
-}
+} */
 
 /* The slider */
-.slider {
+/* .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -73,23 +73,23 @@ input:checked + .slider {
 
 input:focus + .slider {
   box-shadow: 0 0 1px #2196f3;
-}
+} */
 
-input:checked + .slider:before {
+/* input:checked + .slider:before {
   /* -webkit-transform: translateX(70px); */
-  -ms-transform: translateX(70px);
-  transform: translateX(70px);
-}
+/* -ms-transform: translateX(70px); */
+/* transform: translateX(70px); */
+/* } */
 
-.slider.round {
+/* .slider.round {
   border-radius: 34px;
 }
 
 .slider.round:before {
   border-radius: 50%;
-}
+} */
 
-.label-text {
+/* .label-text {
   display: block;
   width: 100%;
   text-align: center;
@@ -98,9 +98,9 @@ input:checked + .slider:before {
   transition: 0.001s;
   line-height: 1;
   margin: 0 auto;
-}
+} */
 
-input:checked + .slider + .label-text {
+/* input:checked + .slider + .label-text {
   opacity: 0;
   pointer-events: none;
 }
@@ -108,14 +108,14 @@ input:checked + .slider + .label-text {
 input:checked + .slider + .label-text::before {
   content: "ON";
   color: white;
-}
+} */
 
-.container1 {
+/* .container1 {
   display: flex;
   justify-content: space-between;
-}
+} */
 
-.leftSide1 {
+/* .leftSide1 {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -124,7 +124,7 @@ input:checked + .slider + .label-text::before {
   flex-wrap: wrap;
   margin-left: 200px;
   margin-top: 30px;
-}
+} */
 
 label#myCheckbox.switch {
   margin-bottom: 10px;
@@ -159,7 +159,7 @@ input#usage {
 }
 
 .rightSide1 label {
-  margin-right: 10px; /* Add some spacing between label and div */
+  margin-left: 450px;
   font-size: xx-large;
 }
 
@@ -174,37 +174,43 @@ input#usage {
   width: 280px;
 }
 
-#bulbImage {
+/* #bulbImage {
   height: 90px;
-}
+} */
 
 @media (max-width: 480px) {
   body {
+    display: block;
     justify-content: center;
     align-items: center;
     margin: auto;
   }
 
-  .container1 {
+  /* .container1 {
     display: flex;
     flex-direction: column;
     row-gap: 0px;
     margin-top: 0px;
     margin-bottom: 10px;
-  }
+  } */
 
-  .leftSide1 {
+  /* .leftSide1 {
     height: 220px;
-  }
+  } */
 
-  .rightSide1 {
+  /* .rightSide1 {
     row-gap: 60px;
-  }
+  } */
 
-  .leftSide1,
+  /* .leftSide1,
   .rightSide1 {
     margin:auto;
     text-align: center;
+  } */
+
+  .rightSide1 label {
+    margin-left: 60px;
+    align-items: center;
   }
 
   .label-text,
@@ -218,11 +224,10 @@ input#usage {
   }
 
   .heading {
-    font-size: 40px;
+    /* font-size: 40px; */
     padding: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
     margin-bottom: 0px;
   }
 
