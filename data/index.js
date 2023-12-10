@@ -6,16 +6,16 @@ var checkbox = document.getElementById("myCheckbox");
 //     fetchData();
 //   }
 // });
-checkbox.addEventListener("change", function () {
-  if (this.querySelector("input").checked) {
-    turnOn();
-    fetchData();
-  }
-  else{
-    turnOff();
-    ignoreData();
-  }
-});
+// checkbox.addEventListener("change", function () {
+//   if (this.querySelector("input").checked) {
+//     turnOn();
+//     fetchData();
+//   }
+//   else{
+//     turnOff();
+//     ignoreData();
+//   }
+// });
 
 // var img = document.getElementById("bulbImage");
 
