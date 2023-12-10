@@ -6,6 +6,16 @@ var checkbox = document.getElementById("myCheckbox");
 //     fetchData();
 //   }
 // });
+checkbox.addEventListener("change", function () {
+  if (this.querySelector("input").checked) {
+    turnOn();
+    fetchData();
+  }
+  else{
+    turnOff();
+    ignoreData();
+  }
+});
 
 // var img = document.getElementById("bulbImage");
 
@@ -51,14 +61,31 @@ function hideText() {
 
 
 
+function turnOn(){
+    var valReq=new XMLHttpRequest();
+    
+    valReq.open("GET","/on",true);
+    valReq.send();
+
+    console.log(this.responseText);
+}
+
+function turnOff(){
+  var valReq=new XMLHttpRequest();
+  
+  valReq.open("GET","/off",true);
+  valReq.send();
+
+  console.log(this.responseText);
+}
+function ignoreData(){
+  document.getElementById("current").innerHTML = "0";
+  document.getElementById("voltage").innerHTML = "0";
+  document.getElementById("power").innerHTML = "0";
+  document.getElementById("power_factor").innerHTML = "0";
+}
+
 function fetchData() {
-    // function turnOn{
-    //     var valReq=new XMLHttpRequest();
-        
-    //     valReq.open("GET","/current",true);
-    //     valReq.send();
-    // }
-  // alert("Fetching data");
   if (!!window.EventSource) {
       
       var source = new EventSource('/events');
