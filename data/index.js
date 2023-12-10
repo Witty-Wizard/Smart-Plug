@@ -1,6 +1,11 @@
 console.log("Welcome MF");
 var checkbox = document.getElementById("myCheckbox");
 
+// checkbox.addEventListener("change", function () {
+//   if (this.querySelector("input").checked) {
+//     fetchData();
+//   }
+// });
 checkbox.addEventListener("change", function () {
   if (this.querySelector("input").checked) {
     turnOn();
@@ -12,23 +17,47 @@ checkbox.addEventListener("change", function () {
   }
 });
 
-var img = document.getElementById("bulbImage");
+// var img = document.getElementById("bulbImage");
 
-img.style.transition = "src 0.5s ease-in-out, height 0.5s ease-in-out";
+// img.style.transition = "src 0.5s ease-in-out, height 0.5s ease-in-out";
 
-checkbox.addEventListener("change", function () {
-  if (this.querySelector("input").checked) {
-    img.style.height = "100px";
-    setTimeout(function () {
-      img.src = "bulbOnBaby.png";
-    }, 50); // Delay to make the transition more noticeable
+// checkbox.addEventListener("change", function () {
+//   if (this.querySelector("input").checked) {
+//     img.style.height = "100px";
+//     setTimeout(function () {
+//       img.src = "bulbOnBaby.png";
+//     }, 50); // Delay to make the transition more noticeable
+//   } else {
+//     img.style.height = "90px";
+//     setTimeout(function () {
+//       img.src = "bulbOffBaby.png";
+//     }, 50); // Delay to make the transition more noticeable
+//   }
+// });
+
+const btn = document.getElementById("gyan_bato");
+
+btn.addEventListener("click", function handleClick() {
+  const initialText = "Show Detailed Analysis";
+
+  if (btn.textContent.toLowerCase().includes(initialText.toLowerCase())) {
+    btn.textContent = "Hide Detailed Analysis";
+    displayText();
   } else {
-    img.style.height = "90px";
-    setTimeout(function () {
-      img.src = "bulbOffBaby.png";
-    }, 50); // Delay to make the transition more noticeable
+    btn.textContent = initialText;
+    hideText();
   }
 });
+
+function displayText() {
+  var text = document.getElementById("analysis");
+  text.style.display = "block";
+}
+
+function hideText() {
+  var text = document.getElementById("analysis");
+  text.style.display = "none";
+}
 
 
 
