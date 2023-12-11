@@ -19,7 +19,7 @@ body {
 
 
 #gyan_bato {
-  margin-left: 550px;
+  margin-left: 600px;
   margin-bottom: 20px;
   background-color: #f1863a;
   border: none;
@@ -167,7 +167,7 @@ label#myCheckbox.switch {
   flex-direction: column;
   row-gap: 80px;
   margin-top: 30px;
-  margin-right: 320px;
+  margin-right: 500px;
   width: auto;
 }
 
@@ -238,7 +238,4 @@ input#usage {
   #power, #voltage, #current, #power_factor {
     width: 100%; /* Make data displays take full width */
   }
-}
-
-
 }
