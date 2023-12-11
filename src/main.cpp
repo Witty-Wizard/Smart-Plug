@@ -6,15 +6,18 @@
 #include "Credentials.h"
 
 #define LED_PIN 26
-#define VOLTAGE_SENSE 36
-#define CURRENT_SENSE 39
+#define VOLTAGE_SENSE 39
+#define CURRENT_SENSE 36
 
-unsigned long total_time = 0;
-unsigned long current_time = 0;
-unsigned long last_time_1 = 0;
-unsigned long last_time = 0;
-unsigned long dt = 0;
-unsigned long Delay = 1;
+// Measurement variables
+uint16_t totalTime = 0;
+uint32_t currentTime = 0;
+uint32_t lastEventTime = 0;
+uint32_t lastMeasurementTime = 0;
+uint8_t elapsedTimeSinceLastMeasurement = 0;
+uint16_t elapsedTimeSinceLastEvent = 0;
+uint8_t measurementInterval = 1;
+uint16_t eventInterval = 1000;
 
 AsyncWebServer server(80);
 
@@ -22,21 +25,21 @@ AsyncWebServer server(80);
 AsyncEventSource events("/events");
 
 // Create variables to store measurements
-float voltage_rms;
-float current_rms;
+float voltageRMS;
+float currentRMS;
 
-float voltage_previous;
+float previousVoltage;
 
-float real_energy;
-float apparant_energy;
+double realEnergy;
+double apparentEnergy;
 
 float voltage;
 float current;
 float power;
-float power_factor;
+float powerFactor;
 
-float voltage_i;
-float current_i;
+double voltageIntegral;
+double currentIntegral;
 
 // put function declarations here:
 void notFound(AsyncWebServerRequest *request);
@@ -72,72 +75,98 @@ void setup() {
   server.on("/index.js", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(LittleFS, "/index.js", "text/javascript"); });
 
+  // Route for root bulbOffBaby.png 
   server.on("/bulbOffBaby.png", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(LittleFS, "/bulbOffBaby.png", "image/png"); });
-
+  
+  // Route for root bulbOffBaby.png
   server.on("/bulbOnBaby.png", HTTP_GET, [](AsyncWebServerRequest *request)
             { request->send(LittleFS, "/bulbOnBaby.png", "image/png"); });          
 
+  // Route for turning on the LED
   server.on("/on", HTTP_ANY, [](AsyncWebServerRequest *request){
     request->send(200, "text/plain", ledOn().c_str());});
   
+  // Route for turning off the LED
   server.on("/off", HTTP_ANY, [](AsyncWebServerRequest *request){
   request->send(200, "text/plain", ledOff().c_str());});
 
+  // Event handling for client connection
   events.onConnect([](AsyncEventSourceClient *client){
     if(client->lastId()){
       Serial.printf("Client reconnected! Last message ID that it got is: %u\n", client->lastId());
     }
 
+    // Send a welcome message to the client
     client->send("hi!", NULL, millis(), 10000);
   });  
 
+  // Set up notFound handler and add event handler
   server.onNotFound(notFound);
   server.addHandler(&events);
+
+  // Start the server
   server.begin();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  current_time = millis();
-  dt = (current_time - last_time);
-  if(current_time - last_time_1 > 7000){
+  currentTime = millis();
+  elapsedTimeSinceLastMeasurement = (currentTime - lastMeasurementTime);
+  elapsedTimeSinceLastEvent = (currentTime - lastEventTime);
+
+  if(elapsedTimeSinceLastEvent > eventInterval){
     // Send Events to the Web Server with the Sensor Readings:
-    events.send(String(voltage_rms).c_str(),"voltage",millis());
-    events.send(String(current_rms).c_str(),"current",millis());
+    events.send(String(voltageRMS).c_str(),"voltage",millis());
+    events.send(String(currentRMS).c_str(),"current",millis());
     events.send(String(power).c_str(),"power",millis());
-    events.send(String(power_factor).c_str(),"power_factor",millis());
-    last_time_1 = millis();
+    events.send(String(powerFactor).c_str(),"power_factor",millis());
+    lastEventTime = millis();
+    Serial.print("Power : ");
+    Serial.print(power);
+    Serial.print(" ");
+    Serial.print("Power factor : ");
+    Serial.print(powerFactor);
+    Serial.print(" ");
+    Serial.print("Current : ");
+    Serial.print(currentRMS);
+    Serial.print(" ");
+    Serial.print("Voltage : ");
+    Serial.print(voltageRMS);
+    Serial.println(" ");
+
   }
-  if (dt > Delay) {
-    voltage_previous = voltage;
+  // Perform measurements
+  if (elapsedTimeSinceLastMeasurement > measurementInterval) {
+    previousVoltage = voltage;
     voltage = map(analogRead(VOLTAGE_SENSE),0,4095,-510,+510);
-    current = map(analogRead(CURRENT_SENSE),0,4095,-5,+5);
-    Serial.print(voltage);
-    Serial.print("  ");
-    Serial.println(current);
+    current = map(analogRead(CURRENT_SENSE),0,4095,-2.5,+2.5);
+    
 
-    if(voltage_previous < 0 && voltage >=0){
-      voltage_rms = sqrt(voltage_i / total_time);
-      current_rms = sqrt(current_i / total_time);
-      power_factor = real_energy/apparant_energy;
-      power = real_energy / total_time;
-      
+    // Calculate RMS values and power factors
+    if(previousVoltage < 0 && voltage >=0){
+      voltageRMS = 0.5 * voltageRMS + 0.5 * sqrtf(voltageIntegral / totalTime);
+      currentRMS = 0.9 * currentRMS + 0.1 * sqrtf(currentIntegral / totalTime);
+      powerFactor = realEnergy/apparentEnergy;
+      power = realEnergy / totalTime;
 
-      total_time = 0;
-      voltage_i = 0;
-      current_i = 0;
-      real_energy = 0;
-      apparant_energy = 0;
+      // Reset variables for the next measurement cycle
+      totalTime = 0;
+      voltageIntegral = 0;
+      currentIntegral = 0;
+      realEnergy = 0;
+      apparentEnergy = 0;
     }
 
-    total_time += dt;
-    voltage_i += voltage*voltage * dt;
-    current_i += current*current * dt;
-    real_energy += current*voltage * dt;
-    apparant_energy += abs(current*voltage) * dt;
+    // Update cumulative values for measurements
+    totalTime += elapsedTimeSinceLastMeasurement;
+    voltageIntegral += voltage*voltage * elapsedTimeSinceLastMeasurement;
+    currentIntegral += current*current * elapsedTimeSinceLastMeasurement;
+    realEnergy += current*voltage * elapsedTimeSinceLastMeasurement;
+    apparentEnergy += abs(current*voltage) * elapsedTimeSinceLastMeasurement;
 
-    last_time = millis();
+    // Update the time of the last measurement
+    lastMeasurementTime = millis();
   }
 
 }
@@ -147,11 +176,13 @@ void notFound(AsyncWebServerRequest *request){
   request->send(404, "text/plain", "Not found");
 }
 
+// Function to turn on the LED and return a status message
 String ledOn(){
   digitalWrite(LED_PIN,HIGH);
   return "led on";
 }
 
+// Function to turn off the LED and return a status message
 String ledOff(){
   digitalWrite(LED_PIN,LOW);
   return "led off";
