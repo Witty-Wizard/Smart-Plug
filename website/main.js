@@ -1,23 +1,6 @@
 console.log("Welcome MF");
 var checkbox = document.getElementById("myCheckbox");
 
-<<<<<<< HEAD
-checkbox.addEventListener("change", function () {
-  if (this.querySelector("input").checked) {
-    fetchData();
-  }
-});
-checkbox.addEventListener("change", function () {
-  if (this.querySelector("input").checked) {
-    turnOn();
-    fetchData();
-  }
-  else{
-    turnOff();
-    ignoreData();
-  }
-});
-=======
 // checkbox.addEventListener("change", function () {
 //   if (this.querySelector("input").checked) {
 //     fetchData();
@@ -33,7 +16,6 @@ checkbox.addEventListener("change", function () {
 //     ignoreData();
 //   }
 // });
->>>>>>> c99f387fb8503b199ae045556c36972646dac2e5
 
 var img = document.getElementById("bulbImage");
 
