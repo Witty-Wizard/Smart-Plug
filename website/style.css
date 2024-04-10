@@ -17,7 +17,6 @@ body {
   padding-bottom: 30px;
 }
 
-
 #gyan_bato {
   margin-left: 600px;
   margin-bottom: 20px;
@@ -234,8 +233,10 @@ input#usage {
     /* margin-right: 20px; */
   }
 
-
-  #power, #voltage, #current, #power_factor {
+  #power,
+  #voltage,
+  #current,
+  #power_factor {
     width: 100%; /* Make data displays take full width */
   }
 }
